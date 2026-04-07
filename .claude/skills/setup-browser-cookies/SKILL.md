@@ -1,0 +1,1 @@
+/Users/jiaoyumin/workspace/testing-manus/.claude/skills/gstack/setup-browser-cookies/SKILL.md

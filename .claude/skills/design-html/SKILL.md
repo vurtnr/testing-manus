@@ -1,0 +1,1 @@
+/Users/jiaoyumin/workspace/testing-manus/.claude/skills/gstack/design-html/SKILL.md

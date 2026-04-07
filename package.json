@@ -1,0 +1,35 @@
+{
+  "name": "rag-knowledge-base",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:migrate": "docker compose exec postgres psql -U rag_user -d rag_kb -f /docker-entrypoint-initdb.d/migrations/001_init.sql"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "canvas": "^3.2.3",
+    "jose": "^6.2.2",
+    "mammoth": "^1.8.0",
+    "next": "^15.3.0",
+    "openai": "^4.91.0",
+    "pdf-to-img": "^5.0.0",
+    "postgres": "^3.4.5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "xlsx": "^0.18.5",
+    "zod": "^3.24.3"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "typescript": "^5.8.3"
+  }
+}
