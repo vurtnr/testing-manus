@@ -8,8 +8,12 @@
   --text-secondary: #6b7280;
   --text-tertiary: #9ca3af;
   --border-color: #e5e7eb;
-  --accent: #3b82f6;
-  --accent-light: #dbeafe;
+  --accent: #0f766e;
+  --accent-light: rgba(15,118,110,0.1);
+  --brand-primary: #0f766e;
+  --brand-dark: #0d5747;
+  --brand-light: #14b8a6;
+  --brand-bg: rgba(15,118,110,0.04);
   --success: #10b981;
   --warning: #f59e0b;
   --error: #ef4444;
@@ -340,7 +344,7 @@ body {
 }
 
 .send-button:hover {
-  background: #2563eb;
+  background: var(--brand-dark);
 }
 
 .send-button:disabled {

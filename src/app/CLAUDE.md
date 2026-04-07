@@ -7,8 +7,5 @@
 
 | ID | Time | T | Title | Read |
 |----|------|---|-------|------|
-| #889 | 7:08 AM | 🔵 | Current root layout lacks authentication state management | ~195 |
 | #871 | 7:02 AM | 🔵 | Main application page component architecture reviewed | ~289 |
-| #865 | 6:57 AM | 🔵 | Application CSS styling structure examined | ~279 |
-| #864 | " | 🔵 | Application main page architecture examined | ~287 |
 </claude-mem-context>
