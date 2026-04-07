@@ -58,26 +58,10 @@ export async function uploadFile(file: File): Promise<{ fileId: string; status: 
   return res.json();
 }
 
-export async function* streamChat(
-  message: string,
-  conversationId?: string
+// Shared SSE stream parser
+async function* parseSSEStream(
+  res: Response
 ): AsyncGenerator<{ type: string; data: any }> {
-  const res = await fetch('/api/chat', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message, conversationId }),
-  });
-
-  if (res.status === 401) {
-    window.location.href = '/login';
-    throw new Error('Session expired');
-  }
-
-  if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.error || 'Chat failed');
-  }
-
   const reader = res.body!.getReader();
   const decoder = new TextDecoder();
   let buffer = '';
@@ -100,6 +84,52 @@ export async function* streamChat(
       }
     }
   }
+}
+
+export async function* streamChat(
+  message: string,
+  conversationId?: string
+): AsyncGenerator<{ type: string; data: any }> {
+  const res = await fetch('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, conversationId }),
+  });
+
+  if (res.status === 401) {
+    window.location.href = '/login';
+    throw new Error('Session expired');
+  }
+
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.error || 'Chat failed');
+  }
+
+  yield* parseSSEStream(res);
+}
+
+export async function* streamAgentChat(
+  message: string,
+  messages: ChatMessage[]
+): AsyncGenerator<{ type: string; data: any }> {
+  const res = await fetch('/api/agent/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, messages }),
+  });
+
+  if (res.status === 401) {
+    window.location.href = '/login';
+    throw new Error('Session expired');
+  }
+
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.error || 'Chat failed');
+  }
+
+  yield* parseSSEStream(res);
 }
 
 export async function getFiles(): Promise<FileItem[]> {
