@@ -15,13 +15,10 @@ export async function DELETE(
     const sql = getDb();
     const env = getEnv();
 
-    // Get file info — verify ownership
-    const [file] = await sql`SELECT storage_path, user_id FROM files WHERE id = ${fileId}`;
+    // Get file info
+    const [file] = await sql`SELECT storage_path FROM files WHERE id = ${fileId}`;
     if (!file) {
       return NextResponse.json({ error: 'File not found' }, { status: 404 });
-    }
-    if (file.user_id !== user.id) {
-      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
     // Delete DB record (cascades to chunks)

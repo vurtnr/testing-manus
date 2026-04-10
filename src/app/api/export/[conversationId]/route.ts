@@ -12,15 +12,11 @@ export async function GET(
     const sql = getDb();
 
     const [conversation] = await sql`
-      SELECT title, user_id FROM conversations WHERE id = ${conversationId}
+      SELECT title FROM conversations WHERE id = ${conversationId}
     `;
 
     if (!conversation) {
       return NextResponse.json({ error: 'Conversation not found' }, { status: 404 });
-    }
-
-    if (conversation.user_id !== user.id) {
-      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
     const messages = await sql`

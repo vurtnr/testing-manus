@@ -9,7 +9,6 @@ export async function GET(request: NextRequest) {
     const files = await sql`
       SELECT id, filename, file_type, file_size, upload_status, created_at
       FROM files
-      WHERE user_id = ${user.id}
       ORDER BY created_at DESC
     `;
 
