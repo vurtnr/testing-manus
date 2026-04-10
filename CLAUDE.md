@@ -27,6 +27,79 @@ Key routing rules:
 - Save progress, checkpoint, resume → invoke checkpoint
 - Code quality, health check → invoke health
 
+## Project Architecture
+
+MaterialSense RAG knowledge base for materials testing. Next.js 15 App Router, React 19, plain CSS (no Tailwind).
+
+### Tech Stack
+- **Framework:** Next.js 15 (App Router), React 19
+- **Styling:** Plain CSS with CSS variables (no Tailwind)
+- **Database:** PostgreSQL with pgvector
+- **AI:** DashScope (OpenAI-compatible API) for LLM, embeddings
+- **Auth:** JWT (jose) + bcryptjs, httpOnly cookies
+- **Runtime:** Node.js (API routes), Edge (middleware)
+
+### Color Theme
+- Primary accent: `--accent: #0f766e` (teal)
+- Text: `--text-primary: #111827`, `--text-secondary: #6b7280`
+- Backgrounds: `--bg-primary: #ffffff`, `--bg-secondary: #f9fafb`
+- Borders: `--border-color: #e5e7eb`
+
+### Key Routes
+- `/` — Agent workbench (welcome + task modes, uses `/api/agent/chat`)
+- `/login` — Split-screen login page
+- `/knowledge` — Three-column RAG layout (FileManager | ChatPanel | EvidencePanel)
+- `/api/agent/chat` — Stateless Agent chat (no RAG, no citations)
+- `/api/chat` — RAG chat with citations
+- `/api/auth/*` — Login, logout, refresh, me, register
+
+### UI Rules
+- **No emoji as icons.** Use inline SVG (Lucide-style, stroke-based, 16x16 for headers).
+- **No Tailwind.** All styles in plain `.css` files with CSS variables.
+- Navigation uses breadcrumb pattern: `[← Page A] > [icon Page B]`
+- Header height: 48px. Three-column layout fills remaining viewport.
+
+### File Structure
+```
+src/
+  app/
+    page.tsx              — Agent workbench (/)
+    login/page.tsx        — Login page
+    knowledge/
+      page.tsx            — Knowledge base page (/knowledge)
+      knowledge.css       — Knowledge page styles
+    home/
+      HomeWelcome.tsx     — Welcome mode component
+      HomeTask.tsx        — Task mode component
+      home.css            — Workbench styles
+    api/
+      agent/chat/route.ts — Agent chat (SSE streaming, no RAG)
+      chat/route.ts       — RAG chat (SSE streaming, citations)
+      auth/*              — Auth endpoints
+  components/
+    FileManager.tsx       — File upload/management sidebar
+    ChatPanel.tsx         — Chat interface
+    EvidencePanel.tsx     — Citation/evidence panel
+  lib/
+    api.ts               — Client-side fetch wrappers (authFetch, streamChat, streamAgentChat)
+    auth.ts              — Edge-safe JWT utilities
+    password.ts          — bcryptjs hash/compare (Node only)
+    dashscope.ts         — DashScope API client
+    db.ts                — PostgreSQL connection
+    env.ts               — Zod-validated env vars
+    rag.ts               — RAG pipeline (retrieval + generation)
+```
+
+## Testing
+
+No test framework configured yet. Manual testing workflow:
+1. `npx next dev -p 3000`
+2. Visit `/login`, use demo credentials
+3. Test workbench at `/`, knowledge base at `/knowledge`
+
+## Version
+
+0.1.0.0 (see VERSION file)
 
 <claude-mem-context>
 # Recent Activity

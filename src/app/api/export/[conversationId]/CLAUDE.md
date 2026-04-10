@@ -9,4 +9,10 @@
 |----|------|---|-------|------|
 | #930 | 7:17 AM | 🔵 | Export API endpoint lacks user authorization checks | ~262 |
 | #891 | 7:08 AM | 🔵 | Conversation export API functionality examined | ~343 |
+
+### Apr 10, 2026
+
+| ID | Time | T | Title | Read |
+|----|------|---|-------|------|
+| #1146 | 9:36 AM | 🔵 | Examined conversation export API generating markdown with citations | ~340 |
 </claude-mem-context>
