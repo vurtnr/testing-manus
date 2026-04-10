@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import AgentInput from '@/components/AgentInput';
 import CapabilityCards from '@/components/CapabilityCards';
 import TodayFocus from '@/components/TodayFocus';
+import CalibrationSection from '@/components/CalibrationSection';
 import RecentTasks from '@/components/RecentTasks';
 import ScenarioEntries from '@/components/ScenarioEntries';
 
@@ -95,6 +96,8 @@ export default function HomeWelcome({
 
         <div className="section-title">📌 今日关注</div>
         <TodayFocus />
+
+        <CalibrationSection />
 
         <div className="section-title">🕐 最近任务</div>
         <RecentTasks onTaskClick={(task) => onQuickTask(task.title)} />

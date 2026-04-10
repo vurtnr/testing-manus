@@ -22,24 +22,53 @@
   flex-shrink: 0;
 }
 
+/* Header left section — breadcrumb layout */
+.app-header-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Breadcrumb-style back button */
 .app-header-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   background: none;
-  border: 1px solid var(--border-color);
+  border: none;
+  padding: 4px 6px;
   border-radius: 6px;
-  padding: 4px 12px;
   cursor: pointer;
   font-size: 13px;
   color: var(--text-secondary);
-  transition: all 0.15s;
+  transition: all 0.2s ease;
+  line-height: 1;
 }
 
 .app-header-back:hover {
-  background: var(--bg-tertiary);
-  color: var(--text-primary);
+  color: var(--accent);
+  background: var(--accent-light);
 }
 
+.app-header-back:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Breadcrumb separator chevron */
+.app-header-sep {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+/* Title with icon */
 .app-header-title {
-  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--text-primary);
+  line-height: 1;
 }

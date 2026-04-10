@@ -46,10 +46,20 @@ export default function KnowledgePage() {
       <div className="app-header">
         <div className="app-header-left">
           <button className="app-header-back" onClick={() => router.push('/')}>
-            ← 返回工作台
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+            <span>工作台</span>
           </button>
-          <div className="app-header-divider" />
-          <span className="app-header-title">📚 知识库</span>
+          <svg className="app-header-sep" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+          <span className="app-header-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+            </svg>
+            知识库
+          </span>
         </div>
         <div className="app-header-right">
           {user && (
