@@ -93,7 +93,7 @@ src/
 ## Testing
 
 No test framework configured yet. Manual testing workflow:
-1. `npx next dev -p 3000`
+1. `npx next dev -p 3030`
 2. Visit `/login`, use demo credentials
 3. Test workbench at `/`, knowledge base at `/knowledge`
 

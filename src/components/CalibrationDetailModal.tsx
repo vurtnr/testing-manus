@@ -128,8 +128,12 @@ export default function CalibrationDetailModal({ device, onClose }: Props) {
               <span className="cal-detail-value">{device.model}</span>
             </div>
             <div className="cal-detail-row">
-              <span className="cal-detail-label">出厂编号</span>
+              <span className="cal-detail-label">设备编号</span>
               <span className="cal-detail-value">{device.serialNumber}</span>
+            </div>
+            <div className="cal-detail-row">
+              <span className="cal-detail-label">责任人</span>
+              <span className="cal-detail-value">设备管理员A</span>
             </div>
             <div className="cal-detail-row">
               <span className="cal-detail-label">存放位置</span>

@@ -1,0 +1,384 @@
+.permeability-layout {
+  height: 100vh;
+  box-sizing: border-box;
+  overflow-y: auto;
+  background:
+    radial-gradient(circle at top left, rgba(20, 184, 166, 0.1), transparent 28%),
+    linear-gradient(180deg, #f7fbfa 0%, #eef4f3 100%);
+  padding: 28px 24px 64px;
+}
+
+.permeability-header {
+  max-width: 1360px;
+  margin: 0 auto 24px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: start;
+}
+
+.permeability-back {
+  border: 1px solid #d4dddb;
+  background: #fff;
+  color: var(--text-secondary);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.permeability-kicker {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brand-primary);
+}
+
+.permeability-header h1 {
+  margin: 8px 0;
+  font-size: 32px;
+  font-weight: 800;
+  color: #16302b;
+}
+
+.permeability-header p {
+  margin: 0;
+  max-width: 760px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.permeability-header-stats {
+  display: flex;
+  gap: 12px;
+}
+
+.permeability-stat {
+  min-width: 124px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 118, 110, 0.1);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.permeability-stat span {
+  display: block;
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.permeability-stat strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 24px;
+  font-weight: 800;
+  color: #16302b;
+}
+
+.permeability-body {
+  max-width: 1360px;
+  margin: 0 auto 28px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.75fr);
+  gap: 18px;
+}
+
+.permeability-stage-panel,
+.permeability-ai-card {
+  border: 1px solid rgba(15, 118, 110, 0.1);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.05);
+}
+
+.permeability-stage-panel {
+  padding: 22px;
+}
+
+.permeability-stage-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.permeability-stage-title,
+.permeability-ai-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #16302b;
+}
+
+.permeability-stage-subtitle,
+.permeability-ai-summary,
+.permeability-specimen-status {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.permeability-stage-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.permeability-stage-badge.status-normal {
+  background: rgba(20, 184, 166, 0.12);
+  color: #0f766e;
+}
+
+.permeability-stage-badge.status-alert {
+  background: rgba(239, 68, 68, 0.12);
+  color: #b91c1c;
+}
+
+.permeability-stage-image-shell {
+  position: relative;
+  margin-top: 18px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(15, 118, 110, 0.1);
+  background: #0f172a;
+  min-height: 620px;
+}
+
+.permeability-stage-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: permeability-frame-in 360ms ease;
+}
+
+.permeability-hotspot {
+  position: absolute;
+  top: 10%;
+  left: 38%;
+  width: 18%;
+  height: 26%;
+  pointer-events: none;
+}
+
+.permeability-hotspot-label {
+  position: absolute;
+  top: -12px;
+  right: -18px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(239, 68, 68, 0.92);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 10px 20px rgba(239, 68, 68, 0.2);
+}
+
+.permeability-timeline {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.permeability-timeline-step {
+  border: 1px solid rgba(15, 118, 110, 0.1);
+  border-radius: 16px;
+  padding: 12px 10px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+  cursor: pointer;
+  text-align: left;
+}
+
+.permeability-timeline-step.active {
+  border-color: rgba(15, 118, 110, 0.28);
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.12);
+  background: rgba(248, 255, 252, 0.96);
+}
+
+.permeability-timeline-node {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(15, 118, 110, 0.25);
+}
+
+.permeability-timeline-step.active .permeability-timeline-node {
+  background: #0f766e;
+}
+
+.permeability-timeline-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #16302b;
+}
+
+.permeability-timeline-step small {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.permeability-ai-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.permeability-ai-card {
+  padding: 18px;
+}
+
+.permeability-ai-summary {
+  margin-top: 10px;
+}
+
+.permeability-specimen-list {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.permeability-specimen-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 118, 110, 0.08);
+  background: #f8fbfb;
+}
+
+.permeability-specimen-item strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  color: #16302b;
+}
+
+.permeability-specimen-item.status-normal {
+  border-color: rgba(20, 184, 166, 0.12);
+}
+
+.permeability-specimen-item.status-watch {
+  border-color: rgba(245, 158, 11, 0.22);
+  background: rgba(255, 251, 235, 0.94);
+}
+
+.permeability-specimen-item.status-alert {
+  border-color: rgba(239, 68, 68, 0.24);
+  background: rgba(254, 242, 242, 0.96);
+}
+
+.permeability-specimen-confidence {
+  font-size: 22px;
+  font-weight: 800;
+  color: #16302b;
+}
+
+.permeability-decision-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.permeability-decision-item {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: #f8fbfb;
+  border: 1px solid rgba(15, 118, 110, 0.08);
+}
+
+.permeability-decision-item.span-2 {
+  grid-column: span 2;
+}
+
+.permeability-decision-item span {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.permeability-decision-item strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.45;
+  color: #16302b;
+}
+
+@keyframes permeability-alert-pulse {
+  0%,
+  100% {
+    transform: scale(0.98);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 1;
+  }
+}
+
+@keyframes permeability-frame-in {
+  from {
+    opacity: 0.55;
+    transform: scale(1.01);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 1180px) {
+  .permeability-header {
+    grid-template-columns: 1fr;
+  }
+
+  .permeability-header-stats {
+    justify-content: flex-start;
+  }
+
+  .permeability-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .permeability-layout {
+    padding: 20px 16px 40px;
+  }
+
+  .permeability-stage-image-shell {
+    min-height: 420px;
+  }
+
+  .permeability-timeline {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .permeability-decision-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .permeability-decision-item.span-2 {
+    grid-column: span 1;
+  }
+}

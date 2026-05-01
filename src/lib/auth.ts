@@ -1,4 +1,5 @@
 import { SignJWT, jwtVerify } from 'jose';
+import { getDb } from './db';
 import { getEnv } from './env';
 
 export interface User {
@@ -50,6 +51,30 @@ export async function getUserFromRequest(request: Request): Promise<User> {
   if (!match) throw new AuthError('No token', 401);
   const payload = await verifyToken(match[1]);
   return { id: payload.sub, email: payload.email, displayName: payload.name };
+}
+
+export async function getUserFromRequestOrDemo(request: Request): Promise<User> {
+  try {
+    return await getUserFromRequest(request);
+  } catch {
+    const sql = getDb();
+    const [user] = await sql`
+      SELECT id, email, display_name
+      FROM users
+      ORDER BY is_demo DESC, created_at ASC
+      LIMIT 1
+    `;
+
+    if (!user) {
+      throw new AuthError('No available user', 401);
+    }
+
+    return {
+      id: user.id,
+      email: user.email,
+      displayName: user.display_name ?? user.email,
+    };
+  }
 }
 
 export class AuthError extends Error {

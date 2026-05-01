@@ -1,68 +1,221 @@
 'use client';
 
-interface Props {
-  onCardClick: (capability: string) => void;
+import { useMemo, useState } from 'react';
+
+export type CapabilityId = 'sales' | 'inspection' | 'management' | 'knowledge';
+
+interface ModuleCard {
+  id: string;
+  title: string;
+  desc: string;
 }
 
-const CAPABILITIES = [
+interface CapabilityCard {
+  id: CapabilityId;
+  name: string;
+  icon: string;
+  desc: string;
+  accent: string;
+  eyebrow: string;
+  hint: string;
+  modules?: ModuleCard[];
+}
+
+interface CapabilityBadge {
+  count: number;
+  statusLabel: string;
+}
+
+interface Props {
+  onKnowledgeClick: () => void;
+  onModuleClick: (moduleId: string) => void;
+  expandedId?: CapabilityId | null;
+  onExpandedChange?: (id: CapabilityId | null) => void;
+  inspectionBadge?: CapabilityBadge | null;
+  inspectionTaskBadge?: CapabilityBadge | null;
+  inspectionReviewBadge?: CapabilityBadge | null;
+  inspectionIssueBadge?: CapabilityBadge | null;
+}
+
+const CAPABILITIES: CapabilityCard[] = [
   {
-    id: 'inspection',
-    name: '检测软件',
-    icon: '🔬',
-    status: '即将上线',
-    statusClass: 'soon',
-    desc: '报告审核、合同评审与财务统计自动化处理',
-    abilities: ['报告审核', '合同评审', '财务统计'],
-    comingSoon: true,
+    id: 'sales',
+    name: '销售',
+    icon: '💼',
+    accent: 'sales',
+    eyebrow: 'Business',
+    hint: '点击展开销售模块',
+    desc: '围绕经营合同、财务和招投标快速进入业务处理。',
+    modules: [
+      { id: 'sales-contract', title: '合同', desc: '合同扫描、要点提取与风险评审。' },
+      { id: 'sales-finance', title: '财务', desc: '收入汇总、回款跟踪与经营分析。' },
+      { id: 'sales-bid', title: '招投标', desc: '标书整理、要求核对与投标准备。' },
+    ],
   },
   {
-    id: 'monitoring',
-    name: '实时监控',
-    icon: '📡',
-    status: '即将上线',
-    statusClass: 'soon',
-    desc: '抗渗、抗压、抗拉实时数据监控与异常预警',
-    abilities: ['抗渗监控', '抗压监控', '抗拉监控'],
-    comingSoon: true,
+    id: 'inspection',
+    name: '检测',
+    icon: '🔬',
+    accent: 'inspection',
+    eyebrow: 'Lab Ops',
+    hint: '点击展开检测流程',
+    desc: '聚焦委托流转、审核签发和个人任务执行。',
+    modules: [
+      { id: 'inspection-entrust', title: '委托', desc: '录入委托、识别资料缺失并触发受理。' },
+      { id: 'inspection-task', title: '我的任务', desc: '汇总待办、实验节点和个人进度。' },
+      { id: 'inspection-review', title: '审核', desc: '进入审核工作台处理待审核原始数据。' },
+      { id: 'inspection-issue', title: '签发', desc: '确认结论、签发文档并追踪回执。' },
+    ],
+  },
+  {
+    id: 'management',
+    name: '管理',
+    icon: '🧭',
+    accent: 'management',
+    eyebrow: 'Org',
+    hint: '点击展开管理入口',
+    desc: '承接组织协同和绩效管理两类高频后台工作。',
+    modules: [
+      { id: 'management-oa', title: 'OA', desc: '审批、通知和跨部门协同入口。' },
+      { id: 'management-performance', title: '人员绩效', desc: '人员产能、任务完成率和绩效复盘。' },
+    ],
   },
   {
     id: 'knowledge',
     name: '知识库',
     icon: '📚',
-    status: '可用',
-    statusClass: '',
-    desc: '国家标准、行业标准智能检索与依据引用',
-    abilities: ['标准检索', '案例查询', '依据引用'],
-    comingSoon: false,
+    accent: 'knowledge',
+    eyebrow: 'Knowledge',
+    hint: '直接进入知识检索',
+    desc: '标准、案例和依据检索入口保持独立，直接进入知识库。',
   },
 ];
 
-export default function CapabilityCards({ onCardClick }: Props) {
+export default function CapabilityCards({
+  onKnowledgeClick,
+  onModuleClick,
+  expandedId: controlledExpandedId,
+  onExpandedChange,
+  inspectionBadge,
+  inspectionTaskBadge,
+  inspectionReviewBadge,
+  inspectionIssueBadge,
+}: Props) {
+  const [internalExpandedId, setInternalExpandedId] = useState<CapabilityId | null>(null);
+  const expandedId = controlledExpandedId ?? internalExpandedId;
+  const setExpandedId = onExpandedChange ?? setInternalExpandedId;
+
+  const visibleCards = useMemo(() => {
+    if (!expandedId) return CAPABILITIES;
+    return CAPABILITIES.filter((card) => card.id === expandedId);
+  }, [expandedId]);
+
   return (
-    <div className="capability-grid">
-      {CAPABILITIES.map((cap) => (
-        <div
-          key={cap.id}
-          className={`capability-card${cap.comingSoon ? ' coming-soon' : ''}`}
-          onClick={() => onCardClick(cap.id)}
-        >
-          <div className="capability-header">
-            <div className="capability-name">
-              <div className="capability-icon">{cap.icon}</div>
-              {cap.name}
+    <div className={`capability-grid${expandedId ? ' single-mode' : ''}`}>
+      {visibleCards.map((capability) => {
+        const isExpanded = expandedId === capability.id;
+        const isKnowledge = capability.id === 'knowledge';
+
+        if (isExpanded && capability.modules) {
+          return (
+            <div
+              key={capability.id}
+              className={`capability-card capability-expanded accent-${capability.accent}`}
+            >
+              <button
+                type="button"
+                className="capability-close-btn"
+                aria-label={`收起${capability.name}`}
+                onClick={() => setExpandedId(null)}
+              >
+                ×
+              </button>
+              <div className="capability-header">
+                <div>
+                  <div className="capability-eyebrow">{capability.eyebrow}</div>
+                  <div className="capability-name">
+                    <div className="capability-icon">{capability.icon}</div>
+                    {capability.name}
+                  </div>
+                </div>
+                <div className="capability-expanded-meta">
+                  {capability.id === 'inspection' && inspectionBadge ? (
+                    <span className="capability-badge">
+                      {inspectionBadge.count} · {inspectionBadge.statusLabel}
+                    </span>
+                  ) : (
+                    `${capability.modules.length} 个模块`
+                  )}
+                </div>
+              </div>
+              <div className="capability-desc">{capability.desc}</div>
+              <div className="capability-module-grid">
+                {capability.modules.map((module) => (
+                  <button
+                    key={module.id}
+                    type="button"
+                    className="capability-module-card"
+                    onClick={() => onModuleClick(module.id)}
+                  >
+                    {module.id === 'inspection-task' && inspectionTaskBadge && (
+                      <span className="capability-module-badge">
+                        {inspectionTaskBadge.count} · {inspectionTaskBadge.statusLabel}
+                      </span>
+                    )}
+                    {module.id === 'inspection-review' && inspectionReviewBadge && (
+                      <span className="capability-module-badge">
+                        {inspectionReviewBadge.count} · {inspectionReviewBadge.statusLabel}
+                      </span>
+                    )}
+                    {module.id === 'inspection-issue' && inspectionIssueBadge && (
+                      <span className="capability-module-badge">
+                        {inspectionIssueBadge.count} · {inspectionIssueBadge.statusLabel}
+                      </span>
+                    )}
+                    <div className="capability-module-title">{module.title}</div>
+                    <div className="capability-module-desc">{module.desc}</div>
+                  </button>
+                ))}
+              </div>
             </div>
-            <span className={`capability-status${cap.statusClass ? ' ' + cap.statusClass : ''}`}>
-              {cap.status}
-            </span>
-          </div>
-          <div className="capability-desc">{cap.desc}</div>
-          <div className="capability-abilities">
-            {cap.abilities.map((a) => (
-              <span key={a} className="ability-tag">{a}</span>
-            ))}
-          </div>
-        </div>
-      ))}
+          );
+        }
+
+        return (
+          <button
+            key={capability.id}
+            type="button"
+            className={`capability-card capability-entry accent-${capability.accent}${isKnowledge ? ' knowledge-entry' : ''}`}
+            onClick={() => {
+              if (isKnowledge) {
+                onKnowledgeClick();
+                return;
+              }
+              setExpandedId(capability.id);
+            }}
+          >
+              <div className="capability-header">
+                <div>
+                  <div className="capability-eyebrow">{capability.eyebrow}</div>
+                  <div className="capability-name">
+                    <div className="capability-icon">{capability.icon}</div>
+                    {capability.name}
+                  </div>
+                </div>
+                {capability.id === 'inspection' && inspectionBadge && (
+                  <span className="capability-badge">
+                    {inspectionBadge.count} · {inspectionBadge.statusLabel}
+                  </span>
+                )}
+              </div>
+            <div className="capability-desc">{capability.desc}</div>
+            <div className="capability-entry-footer">
+              <span className="capability-entry-hint">{capability.hint}</span>
+              <span className="capability-entry-arrow">{isKnowledge ? '→' : '+'}</span>
+            </div>
+          </button>
+        );
+      })}
     </div>
   );
 }

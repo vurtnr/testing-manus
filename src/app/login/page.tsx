@@ -74,11 +74,11 @@ export default function LoginPage() {
             <span>M&#x2084;</span>
           </div>
           <div className="brand-name">MaterialSense</div>
-          <div className="brand-sub">材料检测智能体平台</div>
+          <div className="brand-sub">建设工程检测智能体平台</div>
 
-          <div className="tagline">"材料检测，一个Agent就够了"</div>
+          <div className="tagline">"建设工程检测，一个Agent就够了"</div>
           <div className="tagline-detail">
-            材料检测智能体，全品类材料标准与检测方法一站式覆盖<br />
+            建设工程检测智能体，全品类材料标准与检测方法一站式覆盖<br />
             智能检索 · 条款追溯 · 适用范围分析 · 检测方案推荐<br />
             持续学习，标准更新自动纳入知识库
           </div>
@@ -96,7 +96,7 @@ export default function LoginPage() {
         <div className="form-wrapper">
           <div className="form-header">
             <div className="form-title">登录</div>
-            <div className="form-subtitle">进入您的材料检测工作空间</div>
+            <div className="form-subtitle">进入您的建设工程检测工作空间</div>
           </div>
 
           {error && <div className="form-error">{error}</div>}

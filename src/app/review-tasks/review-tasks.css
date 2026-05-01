@@ -1,0 +1,214 @@
+.review-tasks-layout {
+  height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(20, 184, 166, 0.12), transparent 28%),
+    linear-gradient(180deg, #f7fbfa 0%, #eef4f3 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+.review-tasks-header {
+  height: 56px;
+  padding: 0 24px;
+  border-bottom: 1px solid rgba(15, 118, 110, 0.12);
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.review-tasks-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.review-tasks-back,
+.review-tasks-filter,
+.review-tasks-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid #d4dddb;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.review-tasks-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.review-tasks-subtitle {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.review-tasks-body {
+  padding: 28px 24px 32px;
+  display: grid;
+  grid-template-columns: minmax(360px, 0.9fr) minmax(420px, 1.1fr);
+  gap: 18px;
+  flex: 1;
+  min-height: 0;
+}
+
+.review-tasks-queue,
+.review-tasks-decision {
+  border: 1px solid rgba(15, 118, 110, 0.1);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+  padding: 24px;
+  overflow: hidden auto;
+}
+
+.review-tasks-kicker {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(15, 118, 110, 0.08);
+  color: var(--brand-primary);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.review-tasks-queue h1 {
+  margin: 10px 0 8px;
+  font-size: 24px;
+  color: #16302b;
+}
+
+.review-tasks-queue p,
+.review-tasks-card-meta,
+.review-tasks-empty,
+.review-tasks-note {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.review-tasks-ai-summary {
+  display: inline;
+  color: #0f766e;
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+.review-tasks-feedback {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.review-tasks-feedback.success {
+  background: rgba(16, 185, 129, 0.1);
+  color: #047857;
+}
+
+.review-tasks-feedback.error {
+  background: rgba(239, 68, 68, 0.1);
+  color: #b91c1c;
+}
+
+.review-tasks-list {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.review-tasks-card {
+  border: 1px solid rgba(15, 118, 110, 0.1);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 18px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.review-tasks-card.selected {
+  border-color: rgba(15, 118, 110, 0.28);
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.14);
+}
+
+.review-tasks-card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.review-tasks-card-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #16302b;
+}
+
+.review-tasks-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(245, 158, 11, 0.16);
+  color: #a16207;
+}
+
+.review-tasks-label {
+  display: block;
+  margin-top: 18px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #16302b;
+}
+
+.review-tasks-textarea {
+  width: 100%;
+  min-height: 140px;
+  border: 1px solid rgba(15, 118, 110, 0.12);
+  border-radius: 16px;
+  padding: 14px;
+  resize: vertical;
+  font: inherit;
+  color: #16302b;
+  background: #fff;
+}
+
+.review-tasks-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.review-tasks-primary {
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);
+  color: #fff;
+  cursor: pointer;
+}
+
+.review-tasks-primary:disabled {
+  background: #cbd5d1;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1120px) {
+  .review-tasks-body {
+    grid-template-columns: 1fr;
+  }
+}

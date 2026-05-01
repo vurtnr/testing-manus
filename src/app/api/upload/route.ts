@@ -5,6 +5,7 @@ import { getDb } from '@/lib/db';
 import { getEnv } from '@/lib/env';
 import { ingestFile } from '@/lib/ingestion';
 import { getUserFromRequest, AuthError } from '@/lib/auth';
+import { findDuplicateStandardFile } from '@/lib/standard-file';
 
 const ALLOWED_TYPES = new Set([
   'application/pdf',
@@ -47,6 +48,23 @@ export async function POST(request: NextRequest) {
     const env = getEnv();
     const sql = getDb();
     const fileType = getFileType(file.type);
+
+    const existingFileRows = await sql`
+      SELECT filename, standard_number
+      FROM files
+      WHERE upload_status IN ('pending', 'processing', 'ready')
+    `;
+    const existingFiles = existingFileRows.map((row: any) => ({
+      filename: row.filename as string,
+      standardNumber: row.standard_number as string | null,
+    }));
+    const duplicate = findDuplicateStandardFile(file.name, existingFiles);
+    if (duplicate) {
+      return NextResponse.json(
+        { error: `标准文件已存在：${duplicate.filename}` },
+        { status: 409 }
+      );
+    }
 
     // Ensure upload dir exists
     await fs.mkdir(env.UPLOAD_DIR, { recursive: true });

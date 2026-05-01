@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server';
 import { chatCompletion } from '@/lib/dashscope';
 import { getUserFromRequest, AuthError } from '@/lib/auth';
 
-const AGENT_SYSTEM_PROMPT = `你是 MaterialSense 材料检测智能助手。你是一个专业的材料检测领域 Agent，能够帮助用户完成以下任务：
+const AGENT_SYSTEM_PROMPT = `你是 MaterialSense 建设工程检测智能助手。你是一个专业的建设工程检测领域 Agent，能够帮助用户完成以下任务：
 
 1. 检测报告审核：分析和审核检测报告的完整性和合规性
 2. 异常数据分析：识别检测数据中的异常模式和趋势

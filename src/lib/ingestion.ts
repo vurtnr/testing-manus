@@ -7,6 +7,7 @@ import { parseWord, ParsedSection } from './parsers/word';
 import { parseExcel, ParsedSheet } from './parsers/excel';
 import { parseImage } from './parsers/image';
 import { embedBatch } from './embedding';
+import { extractStandardNumber as extractStandardNumberFromText } from './standard-file';
 
 const PARENT_MAX_CHARS = 2000;
 const CHILD_MAX_CHARS = 600;
@@ -435,11 +436,8 @@ function buildSectionPaths(chunks: ChunkData[]): void {
 
 // --- File-Level Metadata Extraction ---
 
-const STANDARD_NUMBER_PATTERN = /(GB\/T\s+\d+[-—]\d+)/;
-
 function extractStandardNumber(text: string): string | undefined {
-  const match = text.match(STANDARD_NUMBER_PATTERN);
-  return match?.[1];
+  return extractStandardNumberFromText(text);
 }
 
 function extractDocumentTitle(text: string, filename: string): string | undefined {

@@ -4,6 +4,11 @@ import { jwtVerify } from 'jose';
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Let API routes handle auth/JSON responses themselves.
+  if (pathname.startsWith('/api/')) {
+    return NextResponse.next();
+  }
+
   // Check for access token cookie
   const accessToken = request.cookies.get('access_token')?.value;
 
@@ -35,5 +40,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api/auth|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
 };

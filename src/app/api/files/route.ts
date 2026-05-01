@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
     const user = await getUserFromRequest(request);
     const sql = getDb();
     const files = await sql`
-      SELECT id, filename, file_type, file_size, upload_status, created_at
+      SELECT id, filename, file_type, file_size, upload_status, created_at, standard_number, error_message
       FROM files
       ORDER BY created_at DESC
     `;
@@ -20,6 +20,8 @@ export async function GET(request: NextRequest) {
         fileSize: f.file_size,
         uploadStatus: f.upload_status,
         createdAt: f.created_at,
+        standardNumber: f.standard_number,
+        errorMessage: f.error_message,
       }))
     );
   } catch (error: any) {

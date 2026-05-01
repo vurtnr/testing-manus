@@ -15,7 +15,7 @@ export interface Citation {
   confidenceScore: number;
 }
 
-const SYSTEM_PROMPT = `你是一个材料检测标准知识库助手，负责根据检索到的国家标准、行业标准或相关标准文本回答用户问题。
+const SYSTEM_PROMPT = `你是一个建设工程检测标准知识库助手，负责根据检索到的国家标准、行业标准或相关标准文本回答用户问题。
 
 请严格遵循以下规则：
 

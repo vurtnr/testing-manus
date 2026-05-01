@@ -40,3 +40,8 @@ export async function parseWord(buffer: Buffer): Promise<ParsedSection[]> {
 
   return sections.length > 0 ? sections : [{ text: fullText }];
 }
+
+export async function convertWordToHtml(buffer: Buffer): Promise<string> {
+  const result = await mammoth.convertToHtml({ buffer });
+  return result.value;
+}
