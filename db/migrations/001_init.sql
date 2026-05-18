@@ -1,4 +1,4 @@
-CREATE TABLE files (
+CREATE TABLE IF NOT EXISTS files (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   filename TEXT NOT NULL,
   file_type TEXT NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE files (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE chunks (
+CREATE TABLE IF NOT EXISTS chunks (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   file_id UUID REFERENCES files(id) ON DELETE CASCADE,
   chunk_index INTEGER NOT NULL,
@@ -20,17 +20,17 @@ CREATE TABLE chunks (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE INDEX idx_chunks_file_id ON chunks(file_id);
-CREATE INDEX idx_chunks_embedding ON chunks USING hnsw (embedding vector_cosine_ops)
+CREATE INDEX IF NOT EXISTS idx_chunks_file_id ON chunks(file_id);
+CREATE INDEX IF NOT EXISTS idx_chunks_embedding ON chunks USING hnsw (embedding vector_cosine_ops)
   WITH (m = 16, ef_construction = 64);
 
-CREATE TABLE conversations (
+CREATE TABLE IF NOT EXISTS conversations (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   title TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE messages (
+CREATE TABLE IF NOT EXISTS messages (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   conversation_id UUID REFERENCES conversations(id) ON DELETE CASCADE,
   role TEXT NOT NULL,
@@ -39,4 +39,4 @@ CREATE TABLE messages (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE INDEX idx_messages_conversation_id ON messages(conversation_id);
+CREATE INDEX IF NOT EXISTS idx_messages_conversation_id ON messages(conversation_id);

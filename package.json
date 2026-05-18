@@ -9,7 +9,7 @@
     "lint": "next lint",
     "db:up": "docker compose up -d",
     "db:down": "docker compose down",
-    "db:migrate": "docker compose exec postgres psql -U rag_user -d rag_kb -f /docker-entrypoint-initdb.d/migrations/001_init.sql"
+    "db:migrate": "docker compose exec postgres sh -c 'set -e; psql -U rag_user -d rag_kb -f /docker-entrypoint-initdb.d/01-extensions.sql; for f in /docker-entrypoint-initdb.d/migrations/*.sql; do psql -U rag_user -d rag_kb -v ON_ERROR_STOP=1 -f \"$f\"; done'"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

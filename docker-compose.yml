@@ -11,6 +11,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./db/extensions.sql:/docker-entrypoint-initdb.d/01-extensions.sql
+      - ./db/init-migrations.sh:/docker-entrypoint-initdb.d/02-migrations.sh
       - ./db/migrations:/docker-entrypoint-initdb.d/migrations
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U rag_user -d rag_kb"]

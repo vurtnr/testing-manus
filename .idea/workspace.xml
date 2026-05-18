@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2b788abc-4a33-4958-8178-0de628a40da3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/11.1、GBT 15036.1-2018.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/11.2、GBT 15036.2-2018.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/12、GBT 18103-2022.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/1、GBT 21149-2019.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/8、18477_1-2007-gbt-e-300.pdf" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2,
+  "fromUser": false
+}]]></component>
+  <component name="ProjectId" id="3DVQ2WnwUeiqGJJcy1yMEc8MBAZ" />
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "feat/oa__agi"
+  }
+}]]></component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
